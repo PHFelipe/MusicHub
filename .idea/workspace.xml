@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="273bec8c-b3c6-4ccf-9ec4-f5c55dd1ab3c" name="Changes" comment="add Enum">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/enums/GeneroAudiobook.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/enums/GeneroPodcast.java" afterDir="false" />
+    <list default="true" id="273bec8c-b3c6-4ccf-9ec4-f5c55dd1ab3c" name="Changes" comment="Refactor Enums and update classes">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/enums/Genero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/enums/GeneroMusica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/enums/GeneroAudiobook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/enums/GeneroAudiobook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/midia/AudioBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Audiobook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Midia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Midia.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Musica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Musica.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Podcast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Podcast.java" afterDir="false" />
@@ -54,19 +55,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1778957682708</updated>
       <workItem from="1778957685124" duration="1994000" />
-      <workItem from="1779025594698" duration="1294000" />
+      <workItem from="1779025594698" duration="2874000" />
     </task>
     <task id="LOCAL-00001" summary="adding complementary class">
       <option name="closed" value="true" />
@@ -94,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779026120396</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Refactor Enums and update classes">
+      <option name="closed" value="true" />
+      <created>1779027104683</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1779027104683</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,6 +117,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding complementary class" />
     <MESSAGE value="add Enum" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Enum" />
+    <MESSAGE value="Refactor Enums and update classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor Enums and update classes" />
   </component>
 </project>

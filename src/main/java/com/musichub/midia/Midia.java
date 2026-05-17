@@ -12,6 +12,7 @@ public abstract class Midia {
         this.duracao = duracao;
     }
 
+    public abstract void reproduzir();
     public String getTitulo() {
         return this.titulo;
     }

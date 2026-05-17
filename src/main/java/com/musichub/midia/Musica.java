@@ -11,6 +11,12 @@ public class Musica extends Midia {
         this.genero = genero;
     }
 
+    @Override
+    public void reproduzir(){
+        System.out.println("Reproduzindo a Musica " + getTitulo() + " do album " + getAlbum() + " de " + getArtista());
+        System.out.println("Duração: " + getDuracao());
+        System.out.println("Genero: " + getGenero());
+    }
     public String getAlbum() {
         return this.album;
     }
