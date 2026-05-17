@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="273bec8c-b3c6-4ccf-9ec4-f5c55dd1ab3c" name="Changes" comment="adding complementary class" />
+    <list default="true" id="273bec8c-b3c6-4ccf-9ec4-f5c55dd1ab3c" name="Changes" comment="add Enum">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/enums/GeneroAudiobook.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/enums/GeneroPodcast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/enums/Genero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/enums/GeneroMusica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Midia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Midia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Musica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Musica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Podcast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Podcast.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1778957682708</updated>
       <workItem from="1778957685124" duration="1994000" />
-      <workItem from="1779025594698" duration="298000" />
+      <workItem from="1779025594698" duration="1294000" />
     </task>
     <task id="LOCAL-00001" summary="adding complementary class">
       <option name="closed" value="true" />
@@ -78,7 +86,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779025826455</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add Enum">
+      <option name="closed" value="true" />
+      <created>1779026120396</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1779026120396</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -86,6 +102,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding complementary class" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding complementary class" />
+    <MESSAGE value="add Enum" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Enum" />
   </component>
 </project>
