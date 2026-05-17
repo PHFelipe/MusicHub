@@ -1,9 +1,15 @@
 package com.musichub;
 
+import com.musichub.midia.Midia;
+
+import java.util.List;
+
 public interface ServicoStreaming {
-    void adicionarMidia();
+    void adicionarMidia(Midia midia);
 
-    void removerMidia();
+    boolean removerMidia(String titulo);
 
-    void BuscarMidia();
+
+    //Permite a busca por Artista ou por Titulo
+    List<Midia> BuscarMidia(String termo);
 }
