@@ -1,12 +1,14 @@
 package com.musichub.midia;
 
+import com.musichub.enums.Genero;
+
 public abstract class Midia {
     private String titulo;
     private String artista;
     private String duracao;
-    private String genero;
+    private Genero genero;
 
-    public Midia(String titulo, String artista, String duracao, String genero) {
+    public Midia(String titulo, String artista, String duracao, Genero genero) {
         this.titulo = titulo;
         this.artista = artista;
         this.duracao = duracao;
@@ -37,11 +39,11 @@ public abstract class Midia {
         this.duracao = duracao;
     }
 
-    public String getGenero() {
+    public Genero getGenero() {
         return this.genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(Genero genero) {
         this.genero = genero;
     }
 }
