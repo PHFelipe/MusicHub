@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="273bec8c-b3c6-4ccf-9ec4-f5c55dd1ab3c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/AudioBook.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/ServicoStreaming.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Midia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Musica.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/Podcast.java" afterDir="false" />
+    <list default="true" id="273bec8c-b3c6-4ccf-9ec4-f5c55dd1ab3c" name="Changes" comment="Create Class and Interface">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/Catalogo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/midia/AudioBook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +22,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "PHFelipe"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="cc7a2638-a596-4bca-a5dc-8161f6a988ba" />
+        <option name="url" value="https://github.com/PHFelipe/MusicHub" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -49,7 +54,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -65,7 +70,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1778957682708</updated>
-      <workItem from="1778957685124" duration="448000" />
+      <workItem from="1778957685124" duration="1994000" />
     </task>
     <servers />
   </component>
