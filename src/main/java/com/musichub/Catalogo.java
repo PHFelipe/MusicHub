@@ -12,18 +12,24 @@ import java.util.stream.Collectors;
 
 public class Catalogo implements IServicoStreaming {
 
-    private final List<Midia> catalogoMidias;
+    private List<Midia> catalogoMidias;
+
+    private List<Playlist> playlists;
 
     public Catalogo() {
         this.catalogoMidias = new ArrayList<>();
+        this.playlists = new ArrayList<>();
     }
 
     @Override
     public void adicionarMidia(Midia midia) throws DuracaoInvalidaException {
-        validarDuracao(midia);
+        DuracaoValidator.validarDuracao(midia);
         catalogoMidias.add(midia);
     }
 
+    public void adicionarPlaylist(Playlist playlist){
+        playlists.add(playlist);
+    }
     @Override
     public boolean removerMidia(String titulo) throws MidiaNaoEncontradaException {
         boolean removeu = catalogoMidias.removeIf(m -> m.getTitulo().equalsIgnoreCase(titulo));
@@ -60,26 +66,8 @@ public class Catalogo implements IServicoStreaming {
         return Collections.unmodifiableList(catalogoMidias);
     }
 
-    private void validarDuracao(Midia midia) throws DuracaoInvalidaException {
-        if (midia == null || !duracaoValida(midia.getDuracao())) {
-            throw new DuracaoInvalidaException();
-        }
+    public List<Playlist> getPlaylists(){
+        return this.playlists;
     }
 
-    private boolean duracaoValida(String duracao) {
-        if (duracao == null || !duracao.matches("\\d{2}:\\d{2}:\\d{2}")) {
-            return false;
-        }
-
-        String[] partes = duracao.split(":");
-        int horas = Integer.parseInt(partes[0]);
-        int minutos = Integer.parseInt(partes[1]);
-        int segundos = Integer.parseInt(partes[2]);
-
-        if (minutos > 59 || segundos > 59) {
-            return false;
-        }
-
-        return horas > 0 || minutos > 0 || segundos > 0;
-    }
 }

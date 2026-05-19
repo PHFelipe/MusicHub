@@ -1,17 +1,18 @@
 package com.musichub;
 
+import com.musichub.exceptions.DuracaoInvalidaException;
+import com.musichub.exceptions.MidiaNaoEncontradaException;
 import com.musichub.midia.Midia;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class Playlist {
-    private int IDUsuario;
+public class Playlist implements IServicoStreaming{
     private String nomePlaylist;
     private List<Midia> midias;
 
-    public Playlist(int IDUsuario, String nomePlaylist) {
-        this.IDUsuario = IDUsuario;
+    public Playlist(String nomePlaylist) {
         this.midias = new ArrayList<>();
         this.nomePlaylist = nomePlaylist;
     }
@@ -20,10 +21,28 @@ public class Playlist {
 
     public void setNomePlaylist(String nomePlaylist) { this.nomePlaylist = nomePlaylist; }
 
-    public int getIDUsuario() { return IDUsuario; }
+    @Override
+    public void adicionarMidia(Midia midia) throws DuracaoInvalidaException{
+        DuracaoValidator.validarDuracao(midia);
+        midias.add(midia);
+    }
+    @Override
+    public List<Midia> buscarMidia(String termo) throws MidiaNaoEncontradaException {
+        String busca = termo.toLowerCase();
 
-    public void setIDUsuario(int IDUsuario) { this.IDUsuario = IDUsuario; }
+        List<Midia> resultado = midias.stream()
+                .filter(midia -> midia.getTitulo().toLowerCase().contains(busca)
+                        || midia.getArtista().toLowerCase().contains(busca))
+                .collect(Collectors.toList());
 
+        if (resultado.isEmpty()) {
+            throw new MidiaNaoEncontradaException();
+        }
+
+        return resultado;
+    }
+
+    @Override
     public boolean removerMidia (String titulo){
         return midias.removeIf(m -> m.getTitulo().equalsIgnoreCase(titulo));
     }

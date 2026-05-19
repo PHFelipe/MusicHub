@@ -1,6 +1,7 @@
 package com.musichub.ui;
 
 import com.musichub.Catalogo;
+import com.musichub.Playlist;
 import com.musichub.enums.GeneroAudiobook;
 import com.musichub.enums.GeneroMusica;
 import com.musichub.enums.GeneroPodcast;
@@ -9,6 +10,7 @@ import com.musichub.midia.Audiobook;
 import com.musichub.midia.Midia;
 import com.musichub.midia.Musica;
 import com.musichub.midia.Podcast;
+import com.musichub.player.Player;
 
 import java.util.List;
 import java.util.Scanner;
@@ -28,9 +30,12 @@ public class Menu {
     private static final String RED     = "\033[91m";
     private final Scanner scanner;
     private final Catalogo catalogo;
+
+    private final Player player;
     public Menu() {
         this.scanner = new Scanner(System.in);
         this.catalogo = new Catalogo();
+        this.player = new Player();
     }
 
 
@@ -45,6 +50,7 @@ public class Menu {
             switch (opcao) {
                 case "1" -> menuAdicionarMidia();
                 case "2" -> menuCatalogo();
+                case "3" -> menuPlaylists();
                 case "0" -> { rodando = false; exibirSaida(); }
                 default  -> erro("Opção inválida. Tente novamente.");
             }
@@ -89,6 +95,37 @@ public class Menu {
 
     }
 
+    private void menuPlaylists() {
+        limparTela();
+        boolean voltar = false;
+        while (!voltar) {
+            cabecalho("PLAYLISTS");
+            List<Playlist> playlists = catalogo.getPlaylists();
+            if (playlists.isEmpty()) {
+                println(GRAY + "  Nenhuma playlist. Crie uma!" + RESET);
+            } else {
+                for (int i = 0; i < playlists.size(); i++) {
+                    Playlist p = playlists.get(i);
+                    println(CYAN + "  [" + (i + 1) + "] " + WHITE + p.getNomePlaylist()
+                            + GRAY + "  — " + p.getTotalFaixas() + " faixas" + RESET);
+                }
+            }
+            println();
+            println(CYAN + "  [N] " + WHITE + "Nova playlist   "
+                    + CYAN + "[R] " + WHITE + "Remover   "
+                    + CYAN + "[V] " + WHITE + "Ver playlist   "
+                    + CYAN + "[0] " + WHITE + "Voltar" + RESET);
+            prompt("Ação");
+            switch (lerEntrada().toUpperCase()) {
+                case "N" -> criarPlaylist();
+                case "R" -> removerPlaylist();
+                case "V" -> verPlaylist();
+                case "0" -> voltar = true;
+                default  -> erro("Opção inválida.");
+            }
+        }
+    }
+
     private void menuCatalogo() {
         limparTela();
         cabecalho("CATALOGO");
@@ -119,7 +156,15 @@ public class Menu {
         }
         prompt("Ação");
         String op = lerEntrada();
-        //if ("1".equals(op)) reproduzirDaBiblioteca();
+        if ("1".equals(op)) reproduzirDaBiblioteca();
+    }
+
+    private void criarPlaylist() {
+        prompt("Nome da nova playlist");
+        String nome = lerEntrada();
+        if (nome.isBlank()) { erro("Nome não pode ser vazio."); return; }
+        catalogo.adicionarPlaylist(new Playlist(nome));
+        sucesso("Playlist '" + nome + "' criada!");
     }
 
     private void adicionarPodcast() throws DuracaoInvalidaException {
@@ -184,6 +229,22 @@ public class Menu {
         for (Enum<?> v : values) sb.append(v.name()).append("  ");
         return sb.toString();
     }
+
+    private void reproduzirDaBiblioteca() {
+        prompt("Número da mídia");
+        try {
+            int idx = Integer.parseInt(lerEntrada()) - 1;
+            List<Midia> todas = catalogo.getCatalogoMidias();
+            if (idx < 0 || idx >= todas.size()) { erro("Número inválido."); return; }
+            Midia m = todas.get(idx);
+            player.adicionarNaFila(m);
+            player.play();
+            sucesso("Adicionado à fila e reproduzindo: " + m.getTitulo());
+        } catch (NumberFormatException e) {
+            erro("Entrada inválida.");
+        }
+    }
+
     private void cabecalho(String titulo) {
         println(PURPLE + "\n  ╔══════════════════════════════════════╗");
         println(PURPLE + "  ║    " + MAGENTA + BOLD + "// " + titulo + RESET + PURPLE
@@ -206,6 +267,7 @@ public class Menu {
         println(PURPLE + "  ├─────────────────────────────┤" + RESET);
         opcaoMenu("1","ADICIONAR MÍDIA");
         opcaoMenu("2", "VER CATALOGO");
+        opcaoMenu("3", "VER PLAYLISTS");
         opcaoMenu("0","SAIR");
         println(PURPLE + "  └─────────────────────────────┘" + RESET);
         prompt("Escolha");
