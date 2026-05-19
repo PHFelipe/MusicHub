@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="273bec8c-b3c6-4ccf-9ec4-f5c55dd1ab3c" name="Changes" comment="Create Exceptions">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/tests/CatalogoTest.java" afterDir="false" />
+    <list default="true" id="273bec8c-b3c6-4ccf-9ec4-f5c55dd1ab3c" name="Changes" comment="UPDATE MENU">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/musichub/ui/TerminalUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/Catalogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/Catalogo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/exceptions/DuracaoInvalidaException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/exceptions/DuracaoInvalidaException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/musichub/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/musichub/ui/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +72,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.CatalogoTest.adicionaMusica">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.musichub.Main" />
       <module name="music-streaming" />
@@ -104,8 +104,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CatalogoTest.adicionaMusica" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.CatalogoTest.adicionaMusica" />
       </list>
     </recent_temporary>
   </component>
@@ -118,7 +118,8 @@
       <option name="presentableId" value="Default" />
       <updated>1778957682708</updated>
       <workItem from="1778957685124" duration="1994000" />
-      <workItem from="1779025594698" duration="14371000" />
+      <workItem from="1779025594698" duration="14939000" />
+      <workItem from="1779213060299" duration="4900000" />
     </task>
     <task id="LOCAL-00001" summary="adding complementary class">
       <option name="closed" value="true" />
@@ -176,7 +177,23 @@
       <option name="project" value="LOCAL" />
       <updated>1779040783167</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="CREATE FIRST TEST">
+      <option name="closed" value="true" />
+      <created>1779138472354</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1779138472354</updated>
+    </task>
+    <task id="LOCAL-00009" summary="UPDATE MENU">
+      <option name="closed" value="true" />
+      <created>1779138499461</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1779138499461</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +206,8 @@
     <MESSAGE value="update classes with reproduzir" />
     <MESSAGE value="Implement the logic of basic functions" />
     <MESSAGE value="Create Exceptions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Exceptions" />
+    <MESSAGE value="CREATE FIRST TEST" />
+    <MESSAGE value="UPDATE MENU" />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE MENU" />
   </component>
 </project>

@@ -6,9 +6,11 @@ import com.musichub.enums.GeneroMusica;
 import com.musichub.enums.GeneroPodcast;
 import com.musichub.exceptions.DuracaoInvalidaException;
 import com.musichub.midia.Audiobook;
+import com.musichub.midia.Midia;
 import com.musichub.midia.Musica;
 import com.musichub.midia.Podcast;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -42,6 +44,7 @@ public class Menu {
             String opcao = lerEntrada();
             switch (opcao) {
                 case "1" -> menuAdicionarMidia();
+                case "2" -> menuCatalogo();
                 case "0" -> { rodando = false; exibirSaida(); }
                 default  -> erro("Opção inválida. Tente novamente.");
             }
@@ -70,7 +73,7 @@ public class Menu {
     private void adicionarMusica() throws DuracaoInvalidaException {
         prompt("Título");        String titulo = lerEntrada();
         prompt("Artista");       String artista = lerEntrada();
-        prompt("Duração (ex: 3:45)"); String duracao = lerEntrada();
+        prompt("Duração (ex: 00:03:45)"); String duracao = lerEntrada();
         prompt("Álbum");         String album = lerEntrada();
         println(GRAY + "  Gêneros: " + listEnum(GeneroMusica.values()) + RESET);
         prompt("Gênero");
@@ -86,10 +89,43 @@ public class Menu {
 
     }
 
+    private void menuCatalogo() {
+        limparTela();
+        cabecalho("CATALOGO");
+        List<Midia> todas = catalogo.getCatalogoMidias();
+        if (todas.isEmpty()) {
+            println(GRAY + "  Biblioteca vazia. Adicione mídias primeiro." + RESET);
+
+            println();
+            println(CYAN + "  [0] " + WHITE + "Voltar" + RESET);
+        } else {
+            println(GRAY + String.format("  %-3s %-28s %-20s %-16s %-16s %s", "#", "TÍTULO", "ARTISTA", "DURAÇÃO","GENERO", "TIPO") + RESET);
+            println(GRAY + "  " + "─".repeat(98) + RESET);
+            for (int i = 0; i < todas.size(); i++) {
+                Midia m = todas.get(i);
+                String tipo = tipoMidia(m);
+                String genero = tipoGenero(m);
+                println(CYAN + String.format("  %-3d", i + 1)
+                        + WHITE + String.format(" %-28s", truncar(m.getTitulo(), 27))
+                        + GRAY  + String.format(" %-20s", truncar(m.getArtista(), 19))
+                        + PURPLE + String.format(" %-17s", m.getDuracao())
+                        + GRAY + String.format( "%-17s",truncar(genero, 16))
+                        + YELLOW + tipo + RESET
+                );
+            }
+
+            println();
+            println(CYAN + "  [1] " + WHITE + "Reproduzir uma mídia   " + CYAN + "[0] " + WHITE + "Voltar" + RESET);
+        }
+        prompt("Ação");
+        String op = lerEntrada();
+        //if ("1".equals(op)) reproduzirDaBiblioteca();
+    }
+
     private void adicionarPodcast() throws DuracaoInvalidaException {
         prompt("Título");             String titulo = lerEntrada();
         prompt("Criador/Autor");      String artista = lerEntrada();
-        prompt("Duração (ex: 1:12:30)"); String duracao = lerEntrada();
+        prompt("Duração (ex: 01:12:30)"); String duracao = lerEntrada();
         prompt("Host");               String host = lerEntrada();
         prompt("Nº do episódio");     String ep = lerEntrada();
         println(GRAY + "  Gêneros: " + listEnum(GeneroPodcast.values()) + RESET);
@@ -109,7 +145,7 @@ public class Menu {
     private void adicionarAudiobook() throws DuracaoInvalidaException {
         prompt("Título");        String titulo = lerEntrada();
         prompt("Autor");         String artista = lerEntrada();
-        prompt("Duração (ex: 8:30:00)"); String duracao = lerEntrada();
+        prompt("Duração (ex: 08:30:00)"); String duracao = lerEntrada();
         prompt("Narrador");      String narrador = lerEntrada();
         println(GRAY + "  Gêneros: " + listEnum(GeneroAudiobook.values()) + RESET);
         prompt("Gênero");
@@ -123,6 +159,24 @@ public class Menu {
         }
 
 
+    }
+
+    private String tipoGenero(Midia m){
+        if (m instanceof Musica musica)    return musica.getGenero().toString();
+        if (m instanceof Podcast podcast)   return podcast.getGenero().toString();
+        if (m instanceof Audiobook audiobook) return audiobook.getGenero().toString();
+        return "UNDEFINED";
+    }
+
+    private String tipoMidia(Midia m) {
+        if (m instanceof Musica)    return "MÚSICA";
+        if (m instanceof Podcast)   return "PODCAST";
+        if (m instanceof Audiobook) return "AUDIOBOOK";
+        return "MÍDIA";
+    }
+
+    private String truncar(String s, int max) {
+        return s.length() <= max ? s + spaces(max - s.length()) : s.substring(0, max - 1) + "…";
     }
 
     private String listEnum(Enum<?>[] values) {
@@ -151,6 +205,7 @@ public class Menu {
         println(PURPLE + "  │  " + MAGENTA + BOLD + "  // MENU PRINCIPAL" + RESET + PURPLE + "        │" + RESET);
         println(PURPLE + "  ├─────────────────────────────┤" + RESET);
         opcaoMenu("1","ADICIONAR MÍDIA");
+        opcaoMenu("2", "VER CATALOGO");
         opcaoMenu("0","SAIR");
         println(PURPLE + "  └─────────────────────────────┘" + RESET);
         prompt("Escolha");

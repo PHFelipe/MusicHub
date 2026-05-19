@@ -3,6 +3,7 @@ package com.musichub;
 import com.musichub.exceptions.DuracaoInvalidaException;
 import com.musichub.exceptions.MidiaNaoEncontradaException;
 import com.musichub.midia.Midia;
+import com.musichub.midia.Musica;
 
 import java.util.ArrayList;
 import java.util.Collections;
