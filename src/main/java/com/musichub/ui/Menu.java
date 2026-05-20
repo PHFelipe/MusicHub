@@ -167,6 +167,160 @@ public class Menu {
         sucesso("Playlist '" + nome + "' criada!");
     }
 
+    private void removerPlaylist() {
+        List<Playlist> playlists = catalogo.getPlaylists();
+        if (playlists.isEmpty()) {
+            erro("Nenhuma playlist para remover.");
+            return;
+        }
+
+        prompt("Número da playlist para remover");
+        try {
+            int indice = Integer.parseInt(lerEntrada()) - 1;
+            if (indice < 0 || indice >= playlists.size()) {
+                erro("Número de playlist inválido.");
+                return;
+            }
+
+            String nome = playlists.get(indice).getNomePlaylist();
+            if (catalogo.removerPlaylist(indice)) {
+                sucesso("Playlist '" + nome + "' removida!");
+            } else {
+                erro("Não foi possível remover a playlist.");
+            }
+        } catch (NumberFormatException e) {
+            erro("Entrada inválida. Digite apenas o número da playlist.");
+        }
+    }
+
+
+    private void verPlaylist() {
+        Playlist playlist = selecionarPlaylist();
+        if (playlist == null) return;
+
+        boolean voltar = false;
+        while (!voltar) {
+            limparTela();
+            cabecalho("PLAYLIST: " + playlist.getNomePlaylist());
+            listarMidiasPlaylist(playlist);
+
+            println();
+            println(CYAN + "  [A] " + WHITE + "Adicionar mídia   "
+                    + CYAN + "[R] " + WHITE + "Remover mídia   "
+                    + CYAN + "[0] " + WHITE + "Voltar" + RESET);
+            prompt("Ação");
+
+            switch (lerEntrada().toUpperCase()) {
+                case "A" -> adicionarMidiaNaPlaylist(playlist);
+                case "R" -> removerMidiaDaPlaylist(playlist);
+                case "0" -> voltar = true;
+                default -> erro("Opção inválida.");
+            }
+        }
+    }
+
+    private Playlist selecionarPlaylist() {
+        List<Playlist> playlists = catalogo.getPlaylists();
+        if (playlists.isEmpty()) {
+            erro("Nenhuma playlist cadastrada.");
+            return null;
+        }
+
+        prompt("Número da playlist");
+        try {
+            int indice = Integer.parseInt(lerEntrada()) - 1;
+            if (indice < 0 || indice >= playlists.size()) {
+                erro("Número de playlist inválido.");
+                return null;
+            }
+            return playlists.get(indice);
+        } catch (NumberFormatException e) {
+            erro("Entrada inválida. Digite apenas o número da playlist.");
+            return null;
+        }
+    }
+
+    private void listarMidiasPlaylist(Playlist playlist) {
+        List<Midia> midias = playlist.getMidias();
+        if (midias.isEmpty()) {
+            println(GRAY + "  Playlist vazia." + RESET);
+        } else {
+            println(GRAY + String.format("  %-3s %-28s %-20s %-16s %s", "#", "TÍTULO", "ARTISTA", "DURAÇÃO", "TIPO") + RESET);
+            println(GRAY + "  " + "─".repeat(82) + RESET);
+
+            for (int i = 0; i < midias.size(); i++) {
+                Midia m = midias.get(i);
+                println(CYAN + String.format("  %-3d", i + 1)
+                        + WHITE + String.format(" %-28s", truncar(m.getTitulo(), 27))
+                        + GRAY + String.format(" %-20s", truncar(m.getArtista(), 19))
+                        + PURPLE + String.format(" %-17s", m.getDuracao())
+                        + YELLOW + tipoMidia(m) + RESET);
+            }
+        }
+
+        println(GRAY + "\n  Total de faixas: " + playlist.getTotalFaixas()
+                + " | Duração total: " + playlist.getDuracaoPlaylist() + RESET);
+    }
+
+    private void adicionarMidiaNaPlaylist(Playlist playlist) {
+        List<Midia> midiasCatalogo = catalogo.getCatalogoMidias();
+        if (midiasCatalogo.isEmpty()) {
+            erro("Catálogo vazio. Adicione mídias antes de montar playlists.");
+            return;
+        }
+
+        cabecalho("MÍDIAS DO CATÁLOGO");
+        for (int i = 0; i < midiasCatalogo.size(); i++) {
+            Midia m = midiasCatalogo.get(i);
+            println(CYAN + "  [" + (i + 1) + "] " + WHITE + m.getTitulo()
+                    + GRAY + " — " + m.getArtista()
+                    + " — " + m.getDuracao() + RESET);
+        }
+
+        prompt("Número da mídia para adicionar");
+        try {
+            int indice = Integer.parseInt(lerEntrada()) - 1;
+            if (indice < 0 || indice >= midiasCatalogo.size()) {
+                erro("Número de mídia inválido.");
+                return;
+            }
+
+            Midia midia = midiasCatalogo.get(indice);
+            playlist.adicionarMidia(midia);
+            sucesso("Mídia '" + midia.getTitulo() + "' adicionada à playlist!");
+        } catch (NumberFormatException e) {
+            erro("Entrada inválida. Digite apenas o número da mídia.");
+        } catch (DuracaoInvalidaException e) {
+            erro(e.getMessage());
+        }
+    }
+
+    private void removerMidiaDaPlaylist(Playlist playlist) {
+        List<Midia> midias = playlist.getMidias();
+        if (midias.isEmpty()) {
+            erro("Playlist vazia. Não há mídia para remover.");
+            return;
+        }
+
+        prompt("Número da mídia para remover");
+        try {
+            int indice = Integer.parseInt(lerEntrada()) - 1;
+            if (indice < 0 || indice >= midias.size()) {
+                erro("Número de mídia inválido.");
+                return;
+            }
+
+            String titulo = midias.get(indice).getTitulo();
+            if (playlist.removerMidia(titulo)) {
+                sucesso("Mídia '" + titulo + "' removida da playlist!");
+            } else {
+                erro("Não foi possível remover a mídia.");
+            }
+        } catch (NumberFormatException e) {
+            erro("Entrada inválida. Digite apenas o número da mídia.");
+        }
+    }
+
     private void adicionarPodcast() throws DuracaoInvalidaException {
         prompt("Título");             String titulo = lerEntrada();
         prompt("Criador/Autor");      String artista = lerEntrada();

@@ -27,6 +27,15 @@ public class Catalogo implements IServicoStreaming {
         catalogoMidias.add(midia);
     }
 
+    public boolean removerPlaylist(int indice) {
+        if (indice < 0 || indice >= playlists.size()) {
+            return false;
+        }
+
+        playlists.remove(indice);
+        return true;
+    }
+
     public void adicionarPlaylist(Playlist playlist){
         playlists.add(playlist);
     }
