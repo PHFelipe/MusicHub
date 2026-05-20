@@ -1,6 +1,10 @@
 package com.musichub.midia;
 
+import com.musichub.enums.Cores;
 import com.musichub.enums.GeneroPodcast;
+
+import static com.musichub.ui.Menu.spaces;
+import static com.musichub.ui.Menu.truncar;
 
 public class Podcast extends Midia {
     private String host;
@@ -16,11 +20,24 @@ public class Podcast extends Midia {
 
     @Override
     public void reproduzir() {
-        System.out.println("Reproduzindo o Podcast " + getTitulo() + " apresentado por " + getHost());
-        System.out.println("Episódio: " + getNumeroEpisodio());
-        System.out.println("Duração: " + getDuracao());
-        System.out.println("Genero: " + getGenero());
-        System.out.println("Criador: " + getArtista());
+
+        System.out.println(String.format("%s  │  %9s%s%-18s%s│%s", cor(Cores.PURPLE), "", cor(Cores.YELLOW), "PODCAST", cor(Cores.PURPLE), cor(Cores.RESET)));
+
+        System.out.println(cor(Cores.PURPLE) + "  ├─────────────────────────────┤" + cor(Cores.RESET));
+
+        System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.MAGENTA) + cor(Cores.BOLD) + truncar(this.getTitulo(), 27) + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
+
+        System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.YELLOW) + "EP: " + truncar(this.getNumeroEpisodio(),23) + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
+
+        System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.CYAN) + truncar(this.getArtista(), 27) + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
+
+        System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.CYAN) + truncar(this.getHost(), 27) + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
+
+        System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.GRAY) + "Duração: " + this.getDuracao() + spaces(18 - this.getDuracao().length()) + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
+    }
+
+    private String cor(Cores cor){
+        return cor.getCodigo();
     }
 
     public String getHost() {
