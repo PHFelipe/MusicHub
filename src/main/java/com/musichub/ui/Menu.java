@@ -49,8 +49,9 @@ public class Menu {
             String opcao = lerEntrada();
             switch (opcao) {
                 case "1" -> menuAdicionarMidia();
-                case "2" -> menuCatalogo();
-                case "3" -> menuPlaylists();
+                case "2" -> menuPlayer();
+                case "3" -> menuCatalogo();
+                case "4" -> menuPlaylists();
                 case "0" -> { rodando = false; exibirSaida(); }
                 default  -> erro("Opção inválida. Tente novamente.");
             }
@@ -159,6 +160,82 @@ public class Menu {
         if ("1".equals(op)) reproduzirDaBiblioteca();
     }
 
+    private void menuPlayer() {
+        limparTela();
+        boolean voltar = false;
+        boolean toggle = false;
+        while (!voltar) {
+
+            if(toggle) {
+                toggle = false;
+            }else{
+                cabecalho("PLAYER");
+                exibirNowPlaying();
+            }
+            println(GRAY + "  ───────────────────────────────" + RESET);
+            opcaoMenu("1",  "PLAY / PAUSE");
+            opcaoMenu("2",  "PRÓXIMA FAIXA");
+            opcaoMenu("3",  "FAIXA ANTERIOR");
+            opcaoMenu("4",  "AJUSTAR VOLUME");
+            opcaoMenu("5",  "VER FILA");
+            opcaoMenu("0",  "VOLTAR");
+            println(PURPLE + "  └─────────────────────────────┘" + RESET);
+            prompt("Ação");
+            switch (lerEntrada()) {
+                case "1" -> {cabecalho("PLAYER"); togglePlay(); toggle = true;}
+                case "2" -> { player.proximo();   sucesso("▶ Próxima faixa."); }
+                case "3" -> { player.anterior();  sucesso("◀ Faixa anterior."); }
+                case "4" -> ajustarVolume();
+                case "5" -> exibirFila();
+                case "0" -> voltar = true;
+                default  -> erro("Opção inválida.");
+            }
+        }
+    }
+
+    private void exibirNowPlaying() {
+        Midia m = player.getMidiaAtual();
+        println(PURPLE + "  ┌─────────────────────────────┐" + RESET);
+        if (m == null) {
+            println(PURPLE + "  │  " + GRAY + "Nenhuma mídia carregada.   "+ PURPLE + "│" + RESET);
+        } else {
+            String status = player.isTocando() ? GREEN + "     ► REPRODUZINDO        " : YELLOW + "        ⏸ PAUSADO          ";
+            println(PURPLE + "  │  " + status + RESET + PURPLE + "│" + RESET);
+            m.reproduzir();
+            println(PURPLE + "  │  " + WHITE + String.format("%-27s", "Volume: " + player.getVolume() + "%") + RESET + PURPLE + "│" + RESET);
+        }
+    }
+    private void togglePlay() {
+        if (player.getMidiaAtual() == null) { erro("Nenhuma mídia na fila."); return; }
+        if (player.isTocando()) { player.pause();}
+        else                    { player.play();}
+    }
+
+    private void ajustarVolume() {
+        prompt("Volume (0-100)");
+        try {
+            int v = Integer.parseInt(lerEntrada());
+            player.setVolume(v);
+            sucesso("Volume definido para " + player.getVolume() + "%");
+        } catch (NumberFormatException e) {
+            erro("Valor inválido.");
+        }
+    }
+
+    private void exibirFila() {
+        cabecalho("FILA DE REPRODUÇÃO");
+        List<Midia> fila = player.getFila();
+        if (fila.isEmpty()) { println(GRAY + "  Fila vazia." + RESET); }
+        else {
+            for (int i = 0; i < fila.size(); i++) {
+                Midia m = fila.get(i);
+                String cur = (i == player.getIndiceAtual()) ? MAGENTA + "► " : GRAY + "  ";
+                println(cur + CYAN + (i + 1) + ". " + WHITE + m.getTitulo()
+                        + GRAY + "  —  " + m.getArtista() + RESET);
+            }
+        }
+        aguardar();
+    }
     private void criarPlaylist() {
         prompt("Nome da nova playlist");
         String nome = lerEntrada();
@@ -374,7 +451,7 @@ public class Menu {
         return "MÍDIA";
     }
 
-    private String truncar(String s, int max) {
+    public static String truncar(String s, int max) {
         return s.length() <= max ? s + spaces(max - s.length()) : s.substring(0, max - 1) + "…";
     }
 
@@ -420,13 +497,18 @@ public class Menu {
         println(PURPLE + "  │  " + MAGENTA + BOLD + "  // MENU PRINCIPAL" + RESET + PURPLE + "        │" + RESET);
         println(PURPLE + "  ├─────────────────────────────┤" + RESET);
         opcaoMenu("1","ADICIONAR MÍDIA");
-        opcaoMenu("2", "VER CATALOGO");
-        opcaoMenu("3", "VER PLAYLISTS");
+        opcaoMenu("2", "MIDIA PLAYER");
+        opcaoMenu("3", "VER CATALOGO");
+        opcaoMenu("4", "VER PLAYLISTS");
         opcaoMenu("0","SAIR");
         println(PURPLE + "  └─────────────────────────────┘" + RESET);
         prompt("Escolha");
     }
 
+    private void aguardar() {
+        prompt("Pressione ENTER para continuar");
+        scanner.nextLine();
+    }
     private String lerEntrada() {
         return scanner.nextLine().trim();
     }
@@ -444,7 +526,7 @@ public class Menu {
                 + GRAY + "$ " + WHITE + msg + " › " + RESET);
     }
 
-    private String spaces(int n) {
+    public static String spaces(int n) {
         return " ".repeat(Math.max(0, n));
     }
     private void erro(String msg) {

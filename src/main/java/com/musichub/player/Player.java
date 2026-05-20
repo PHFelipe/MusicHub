@@ -1,5 +1,6 @@
 package com.musichub.player;
 
+import com.musichub.enums.Cores;
 import com.musichub.midia.Midia;
 import com.musichub.Playlist;
 import java.util.ArrayList;
@@ -31,12 +32,22 @@ public class Player {
     public void play() {
         if (midiaAtual != null) {
             tocando = true;
+            System.out.println(cor(Cores.PURPLE) + "  ┌─────────────────────────────┐"+ cor(Cores.RESET));
+            System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.CYAN) + cor(Cores.BOLD)+ "     ► REPRODUZINDO        " + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
             midiaAtual.reproduzir();
+            System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.WHITE) + String.format("%-27s", "Volume: " + this.getVolume() + "%") + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
         }
     }
 
+    private String cor(Cores cor){
+        return cor.getCodigo();
+    }
     public void pause() {
         tocando = false;
+        System.out.println(cor(Cores.PURPLE) + "  ┌─────────────────────────────┐"+ cor(Cores.RESET));
+        System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.CYAN) + cor(Cores.BOLD)+ "        ⏸ PAUSADO          " + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
+        midiaAtual.reproduzir();
+        System.out.println(cor(Cores.PURPLE) + "  │  " + cor(Cores.WHITE) + String.format("%-27s", "Volume: " + this.getVolume() + "%") + cor(Cores.RESET) + cor(Cores.PURPLE) + "│" + cor(Cores.RESET));
     }
 
     public void proximo() {
