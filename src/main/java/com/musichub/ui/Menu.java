@@ -10,7 +10,7 @@ import com.musichub.midia.Audiobook;
 import com.musichub.midia.Midia;
 import com.musichub.midia.Musica;
 import com.musichub.midia.Podcast;
-import com.musichub.player.Player;
+import com.musichub.Player;
 
 import java.util.List;
 import java.util.Scanner;

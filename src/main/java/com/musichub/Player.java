@@ -1,4 +1,4 @@
-package com.musichub.player;
+package com.musichub;
 
 import com.musichub.enums.Cores;
 import com.musichub.midia.Midia;
